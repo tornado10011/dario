@@ -1,0 +1,362 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nami | Carolina te extraño</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .title-nami {
+            font-family: 'Great Vibes', cursive;
+            background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 10px 20px rgba(255, 65, 108, 0.15);
+        }
+
+        .subtitle-carolina {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Canvas de corazones de fondo */
+        #heartsCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Efecto de marco elegante para la imagen */
+        .image-frame {
+            position: relative;
+            box-shadow: 0 15px 35px rgba(255, 75, 110, 0.15), 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .image-frame:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(255, 75, 110, 0.25), 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Brillo suave pulsante */
+        .heart-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* Estilo de la carta */
+        .letter-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 182, 193, 0.4);
+        }
+
+        /* Animación suave de aparición */
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center relative selection:bg-pink-100 selection:text-pink-600">
+
+    <!-- Canvas animado de fondo para los corazones -->
+    <canvas id="heartsCanvas"></canvas>
+
+    <!-- Contenedor Principal -->
+    <main class="w-full max-w-4xl px-4 py-8 md:py-12 z-10 flex flex-col items-center text-center fade-in">
+        
+        <!-- Encabezado con Nombre Grande -->
+        <header class="mb-6">
+            <h1 class="title-nami text-7xl md:text-9xl font-bold tracking-wide select-none">
+                Nami
+            </h1>
+            <div class="flex items-center justify-center gap-2 mt-2 text-pink-400">
+                <span class="h-[1px] w-12 bg-pink-300"></span>
+                <i class="fa-solid fa-heart heart-pulse text-pink-500 text-sm"></i>
+                <span class="h-[1px] w-12 bg-pink-300"></span>
+            </div>
+        </header>
+
+        <!-- Subtítulo Principal -->
+        <section class="mb-10">
+            <h2 class="subtitle-carolina text-4xl md:text-6xl text-rose-600 font-semibold drop-shadow-sm">
+                Carolina, te extraño
+            </h2>
+            <p class="text-gray-400 text-xs md:text-sm tracking-widest uppercase mt-2 font-medium">
+                Pensando en ti cada instante
+            </p>
+        </section>
+
+        <!-- ========================================================================= -->
+        <!-- AQUÍ ESTÁ EL COMENTARIO HTML SOLICITADO PARA TU IMAGEN:                 -->
+        <!-- Puedes reemplazar el bloque <div class="image-placeholder">...</div>     -->
+        <!-- por tu etiqueta <img>. Por ejemplo:                                      -->
+        <!-- <img src="tu-foto.jpg" alt="Foto especial" class="w-full h-full object-cover rounded-2xl"> -->
+        <!-- ========================================================================= -->
+        
+        <div class="w-full max-w-md mx-auto mb-10 px-4">
+            <div class="image-frame bg-gradient-to-tr from-pink-50 via-red-50 to-pink-100 rounded-3xl p-3 border border-pink-200/60">
+                
+                <!-- COMIENZO CONTENEDOR DE IMAGEN -->
+                <div class="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden flex flex-col items-center justify-center border-2 border-dashed border-pink-300 bg-white/80 group transition-all duration-300">
+                    
+                    <!-- Marcador visual por defecto (Reemplazar este <img> por tu propia foto) -->
+                    <img id="mainImage" 
+                         src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80" 
+                         alt="Para Carolina" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                         onerror="this.onerror=null; this.src='https://placehold.co/600x800/fff0f3/ff4d6d?text=Inserta+tu+foto+aqui';" />
+
+                    <!-- Overlay informativo para cuando edites el HTML -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 text-white text-center text-xs md:text-sm backdrop-blur-sm pointer-events-none">
+                        <p><i class="fa-solid fa-code mb-2 text-xl block"></i>Edita el archivo index.html para colocar el enlace de tu foto favorita juntos.</p>
+                    </div>
+                </div>
+                <!-- FIN CONTENEDOR DE IMAGEN -->
+
+            </div>
+        </div>
+
+        <!-- Mensaje Emotivo y Carta -->
+        <article class="letter-card w-full max-w-2xl rounded-3xl p-6 md:p-10 shadow-sm mb-8 text-left relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-pink-100 rounded-full blur-2xl opacity-60"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-red-100 rounded-full blur-2xl opacity-60"></div>
+
+            <p class="text-gray-700 leading-relaxed text-base md:text-lg mb-4 font-light">
+                <span class="text-3xl font-serif text-pink-500 float-left mr-2 leading-none">A</span>veces el silencio hace que los recuerdos me hablen con más fuerza. Hay días en los que miro a mi alrededor y me doy cuenta de cuánto hace falta tu risa, tus palabras y esa paz que solo tú sabías transmitir.
+            </p>
+            
+            <p class="text-gray-700 leading-relaxed text-base md:text-lg mb-4 font-light">
+                Quería crear este rincón especial solo para recordarte que sigues estando muy presente en mis pensamientos. extraños los momentos compartidos, los detalles más pequeños y todo aquello que contigo siempre fue mejor.
+            </p>
+
+            <p class="text-gray-700 leading-relaxed text-base md:text-lg mb-6 font-light">
+                No importa cuánto tiempo pase o la distancia que haya, siempre guardaré con inmenso cariño todo lo que vivimos. 
+            </p>
+
+            <div class="pt-4 border-t border-pink-100 flex justify-between items-center">
+                <span class="subtitle-carolina text-2xl text-pink-600 font-bold">Con amor y nostalgia,</span>
+                <button onclick="createHeartBurst()" class="bg-pink-50 hover:bg-pink-100 text-pink-600 font-medium px-4 py-2 rounded-full text-sm transition-all flex items-center gap-2 border border-pink-200 active:scale-95">
+                    <i class="fa-solid fa-heart text-red-500"></i> Enviar amor
+                </button>
+            </div>
+        </article>
+
+        <!-- Botones Interactivos / Redes o Mensaje -->
+        <div class="flex flex-wrap justify-center gap-4">
+            <button id="musicBtn" onclick="toggleAudio()" class="px-6 py-3 rounded-full bg-white border border-gray-200 text-gray-700 shadow-sm hover:shadow-md hover:border-pink-300 transition-all text-sm font-medium flex items-center gap-2">
+                <i class="fa-solid fa-music text-pink-500"></i> <span id="musicText">Música de fondo</span>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="w-full text-center py-6 text-gray-400 text-xs z-10 border-t border-gray-100 bg-white/80">
+        <p class="flex items-center justify-center gap-1">
+            Hecho con <i class="fa-solid fa-heart text-red-400 text-xs"></i> para Carolina
+        </p>
+    </footer>
+
+    <!-- Script para Animación de Corazones y Efectos -->
+    <script>
+        // Configuración del Canvas para Corazones Flotantes
+        const canvas = document.getElementById('heartsCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Estructura de cada Corazón
+        class Heart {
+            constructor(x, y, isBurst = false) {
+                this.x = x || Math.random() * width;
+                this.y = y || (isBurst ? y : height + Math.random() * 100);
+                this.size = Math.random() * 14 + 8;
+                this.speedY = isBurst ? (Math.random() - 0.5) * 6 : -(Math.random() * 1.2 + 0.5);
+                this.speedX = isBurst ? (Math.random() - 0.5) * 6 : Math.sin(Math.random() * Math.PI) * 0.8;
+                this.opacity = Math.random() * 0.5 + 0.4;
+                this.fadeSpeed = isBurst ? 0.015 : 0.002;
+                this.color = `hsl(${Math.random() * 20 + 340}, 85%, ${Math.random() * 20 + 60}%)`;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                
+                // Dibujar forma de corazón con curvas Bézier
+                ctx.beginPath();
+                const topCurveHeight = this.size * 0.3;
+                ctx.moveTo(0, topCurveHeight);
+                ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+                ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.restore();
+            }
+
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
+                this.opacity -= this.fadeSpeed;
+
+                // Reiniciar si el corazón sale por arriba
+                if (this.opacity <= 0 || this.y < -20) {
+                    this.opacity = 0;
+                }
+            }
+        }
+
+        let hearts = [];
+        const maxHearts = 35; // Límite de corazones simultáneos para suavidad
+
+        // Inicializar corazones
+        for (let i = 0; i < maxHearts; i++) {
+            hearts.push(new Heart(Math.random() * width, Math.random() * height));
+        }
+
+        // Bucle de animación
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Mantener número constante de corazones cayendo/subiendo
+            if (hearts.length < maxHearts && Math.random() < 0.1) {
+                hearts.push(new Heart());
+            }
+
+            for (let i = hearts.length - 1; i >= 0; i--) {
+                hearts[i].update();
+                hearts[i].draw();
+
+                if (hearts[i].opacity <= 0) {
+                    hearts.splice(i, 1);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Efecto especial al presionar el botón "Enviar amor"
+        function createHeartBurst() {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            for (let i = 0; i < 30; i++) {
+                hearts.push(new Heart(centerX, centerY, true));
+            }
+        }
+
+        // Lógica de Sonido Ambiental / Música de Fondo suave (Synth WebAudio)
+        let audioCtx = null;
+        let isPlaying = false;
+        let intervalId = null;
+
+        function toggleAudio() {
+            const musicText = document.getElementById('musicText');
+            
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (!isPlaying) {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                isPlaying = true;
+                musicText.innerText = "Pausar melodía";
+                playSoftMelody();
+            } else {
+                isPlaying = false;
+                musicText.innerText = "Música de fondo";
+                if (intervalId) clearInterval(intervalId);
+            }
+        }
+
+        // Generador de acordes suaves en piano synth
+        function playNote(freq, duration) {
+            if (!isPlaying || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        function playSoftMelody() {
+            const notes = [261.63, 329.63, 392.00, 440.00, 349.23, 293.66]; // Notas armónicas suaves (C4, E4, G4, A4, F4, D4)
+            let index = 0;
+
+            intervalId = setInterval(() => {
+                if (!isPlaying) return;
+                playNote(notes[index], 2.5);
+                index = (index + 1) % notes.length;
+            }, 1800);
+        }
+
+        // Iniciar la animación del Canvas
+        window.onload = function() {
+            animate();
+        };
+    </script>
+</body>
+</html>
+```
